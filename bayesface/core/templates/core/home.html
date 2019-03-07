@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>基于贝叶斯的人脸识别系统</title>
+  <meta name="keywords" content="table">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="/static/assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar am-topbar-inverse admin-header">
+  <div class="am-topbar-brand">
+    <strong>基于贝叶斯的人脸识别系统</strong>
+  </div>
+</header>
+
+<a href="{% url 'simple_upload' %}">Simple Upload</a>
+
+<div class="am-cf admin-main">
+
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="admin-content-body">
+      <div class="am-cf am-padding am-padding-bottom-0">
+      		<div class="am-panel am-panel-default">
+            <div class="am-panel-bd">
+              <div class="am-g">
+                <div id="preview" class="am-u-md-4">
+
+                </div>
+                <div class="am-u-md-8">
+                  <p>请选择待处理的图片数据信息 </p>
+                  <form class="am-form" enctype="multipart/form-data" method="post" action="/uploads/simple/">
+                      {% csrf_token %}
+                    <div class="am-form-group">
+                      <input type="file" id="myfile" name="myfile" onchange="preview(this)">
+                      <p class="am-form-help">请选择要上传的图片...</p>
+                      <button type="submit" class="am-btn am-btn-primary am-btn-xs">检测</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      
+       <div class="am-g">
+      </div>
+
+  </div>
+  <!-- content end -->
+</div>
+
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/static/assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/static/assets/js/amazeui.min.js"></script>
+<script src="/static/assets/js/app.js"></script>
+
+ <script type="text/javascript">
+  function preview(file) {
+    var prevDiv = document.getElementById('preview');
+    if (file.files && file.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+      }
+      reader.readAsDataURL(file.files[0]);
+    } else {
+      prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+    }
+  }
+  </script>
+
+</body>
+</html>
